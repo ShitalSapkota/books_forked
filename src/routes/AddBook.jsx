@@ -13,7 +13,7 @@ import useAxios from "../services/useAxios";
 import { bookGenres } from "../genres";
 import { Stack, Typography } from "@mui/material";
 
-// AddBook function focusing on adding required input fields for the books using state and and other event handler functions.
+// AddBook function: focusing on adding required input fields for the books using state and and other event handler functions.
 
 function AddBook() {
   const { alert, post } = useAxios("http://localhost:3001");
@@ -56,7 +56,6 @@ function AddBook() {
     }
   };
 
-  //
   function postHandler() {
     post("books", book);
   }

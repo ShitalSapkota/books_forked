@@ -23,10 +23,11 @@ function Header() {
               Books
             </Typography>
           </Typography>
-
+          {/* Home Link */}
           <Button color="inherit" variant="text" component={Link} to="/">
             Home
           </Button>
+          {/* Add New */}
           <Button color="inherit" variant="text" component={Link} to="/addnew">
             Add New
           </Button>
