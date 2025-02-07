@@ -30,6 +30,7 @@ function Books() {
     }
   }, []);
 
+  // TODO: Replace axios with useAxios hook : DONE
   // calling data from custom hooks
   async function getBooks() {
     try {
@@ -47,7 +48,7 @@ function Books() {
     }
   }, [data]);
 
-  // Implement search functionality
+  // TODO: Implement search functionality : DONE
   useEffect(() => {
     if (searchBook.trim()) {
       const result = books.filter(
