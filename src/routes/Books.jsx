@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxios from "../services/useAxios";
 import {
   Box,
   Card,
@@ -17,6 +17,7 @@ import {
 function Books() {
   const [books, setBooks] = useState([]); // to push data into the books array
   const [isLoading, setIsLoading] = useState(true); // to check true or false as it is loading or not.
+  const { data, get } = useAxios("http://localhost:3000");
 
   useEffect(() => {
     if (books.length === 0) {
@@ -24,16 +25,22 @@ function Books() {
     }
   }, []);
 
-  // TODO: Replace axios with useAxios hook
+  // TODO: Replace axios with useAxios hook : DONE
+
+  // calling data from custom hooks
   async function getBooks() {
     try {
-      const response = await axios.get("http://localhost:3000/books"); // fetching data from the given URL
-      setBooks(response.data); // set data into Books
-      setIsLoading(false);
+      await get("books");
     } catch (error) {
-      console.error(error); // catching errors
+      console.error(error);
     }
   }
+  useEffect(() => {
+    if (data) {
+      setBooks(data);
+      setIsLoading(false);
+    }
+  }, [data]);
 
   // TODO: Implement search functionality
   return (
