@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "../services/useAxios";
+
 import {
   Box,
   Card,
@@ -11,6 +12,7 @@ import {
   Rating,
   Chip,
   Typography,
+  TextField,
 } from "@mui/material";
 
 // for Books: to store and fetch data
@@ -19,13 +21,14 @@ function Books() {
   const [isLoading, setIsLoading] = useState(true); // to check true or false as it is loading or not.
   const { data, get } = useAxios("http://localhost:3000");
 
+  const [searchBook, setSearchBook] = useState(""); // for searching book
+  const [filteredBooks, setFilteredBooks] = useState([]); // to filtered books by genres
+
   useEffect(() => {
     if (books.length === 0) {
       getBooks(); // calling the function
     }
   }, []);
-
-  // TODO: Replace axios with useAxios hook : DONE
 
   // calling data from custom hooks
   async function getBooks() {
@@ -35,19 +38,45 @@ function Books() {
       console.error(error);
     }
   }
+
   useEffect(() => {
     if (data) {
       setBooks(data);
+      setFilteredBooks(data);
       setIsLoading(false);
     }
   }, [data]);
 
-  // TODO: Implement search functionality
+  // Implement search functionality
+  useEffect(() => {
+    if (searchBook.trim()) {
+      const result = books.filter(
+        (book) =>
+          book.name.toLowerCase().includes(searchBook.toLowerCase()) ||
+          book.genres.some((genre) =>
+            genre.toLowerCase().includes(searchBook.toLowerCase())
+          ) ||
+          book.author.toLowerCase().includes(searchBook.toLowerCase())
+      );
+      setFilteredBooks(result);
+    } else {
+      setFilteredBooks(books);
+    }
+  }, [searchBook, books]);
+
   return (
     <Box sx={{ mx: "auto", p: 2 }}>
       {isLoading && <CircularProgress />}
       {!isLoading && (
         <div>
+          <TextField
+            label="Search by title, author or genre"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={searchBook}
+            onChange={(e) => setSearchBook(e.target.value)}
+          />
           <Stack
             sx={{ justifyContent: "space-around" }}
             spacing={{ xs: 1 }}
@@ -55,7 +84,7 @@ function Books() {
             useFlexGap
             flexWrap="wrap"
           >
-            {books.map((book) => (
+            {filteredBooks.map((book) => (
               <Card
                 sx={{
                   display: "flex",
