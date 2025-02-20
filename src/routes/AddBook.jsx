@@ -13,11 +13,10 @@ import useAxios from "../services/useAxios";
 import { bookGenres } from "../genres";
 import { Stack, Typography } from "@mui/material";
 
-// AddBook function: focusing on adding required input fields for the books using state and and other event handler functions.
+// AddBook function: focusing on required input fields for the books using state and and other event handler functions.
 
 function AddBook() {
   const { alert, post } = useAxios("http://localhost:3001");
-  const [rateValue, setRateValue] = useState(3);
   const [book, setBook] = useState({
     author: "",
     name: "",
@@ -56,8 +55,25 @@ function AddBook() {
     }
   };
 
-  function postHandler() {
-    post("books", book);
+  // form submission handler
+  function postHandler(e) {
+    e.preventDefault();
+    try {
+      post("books", book);
+    } catch (error) {
+      console.error(error);
+    }
+
+    // reset
+    setBook({
+      author: "",
+      name: "",
+      genres: [],
+      completed: false,
+      start: null,
+      end: null,
+      stars: null,
+    });
   }
 
   return (
@@ -114,14 +130,13 @@ function AddBook() {
         <DateField name="start" label="Started" />
         <DateField name="end" label="Finished" disabled={!book.completed} />
         <Stack spacing={1}>
+          {/* Fix Rating component mouseover */}
           <Rating
             name="stars"
-            value={rateValue}
-            onClick={rateChangeHandler}
+            value={+book.stars}
+            onChange={rateChangeHandler}
             size="large"
-            onChange={(event, newValue) => {
-              setRateValue(newValue);
-            }}
+            precision={1}
           />
         </Stack>
         <Button variant="contained" type="submit">
