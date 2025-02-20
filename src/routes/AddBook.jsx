@@ -16,7 +16,7 @@ import { Stack, Typography } from "@mui/material";
 // AddBook function: focusing on required input fields for the books using state and and other event handler functions.
 
 function AddBook() {
-  const { alert, post } = useAxios("http://localhost:3000"); // changes in the url
+  const { alert, post } = useAxios("http://localhost:3000");
   const [book, setBook] = useState({
     author: "",
     name: "",
@@ -56,13 +56,23 @@ function AddBook() {
   };
 
   // form submission handler
-  async function postHandler(e) {
+  function postHandler(e) {
     e.preventDefault();
     try {
-      await post("books", book);
+      post("books", book);
     } catch (error) {
       console.error(error);
     }
+    // reset
+    setBook({
+      author: "",
+      name: "",
+      genres: [],
+      completed: false,
+      start: null,
+      end: null,
+      stars: null,
+    });
   }
 
   return (
