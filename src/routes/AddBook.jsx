@@ -63,17 +63,6 @@ function AddBook() {
     } catch (error) {
       console.error(error);
     }
-
-    // reset
-    setBook({
-      author: "",
-      name: "",
-      genres: [],
-      completed: false,
-      start: null,
-      end: null,
-      stars: null,
-    });
   }
 
   return (
