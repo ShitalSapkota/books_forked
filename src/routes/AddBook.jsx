@@ -29,12 +29,15 @@ function AddBook() {
 
   const [errors, setErrors] = useState({});
 
+  // using default image if img url empty
+  const defaultImageUrl =
+    "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
   // Validate Textfields
   const validate = () => {
     let tempErrors = {};
     tempErrors.name = book.name ? "" : "This field is required.";
     tempErrors.author = book.author ? "" : "This field is required.";
-    tempErrors.img = book.img ? "" : "This field is required.";
     tempErrors.genres = book.genres.length ? "" : "This field is required.";
     setErrors(tempErrors);
 
@@ -73,8 +76,12 @@ function AddBook() {
   function postHandler(e) {
     e.preventDefault();
     if (validate()) {
+      const bookData = {
+        ...book,
+        img: book.img || defaultImageUrl,
+      };
       try {
-        post("books", book);
+        post("books", bookData);
       } catch (error) {
         console.error(error);
       }
@@ -123,8 +130,6 @@ function AddBook() {
           id="outlined-basic"
           label="Image (url)"
           variant="outlined"
-          error={!!errors.img}
-          helperText={errors.img}
         />
         <Select
           labelId="demo-multiple-name-label"
