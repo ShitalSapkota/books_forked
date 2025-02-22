@@ -95,16 +95,6 @@
       "stars": "5",
       "img": "https://books.google.fi/books/publisher/content?id=PGR2AwAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U2yOpslGog4pI6u_p_MvRErD_yKCA&w=1280",
       "id": 7
-    },
-    {
-      "author": "",
-      "name": "",
-      "genres": [],
-      "completed": false,
-      "start": null,
-      "end": null,
-      "stars": null,
-      "id": 8
     }
   ]
 }

@@ -27,6 +27,20 @@ function AddBook() {
     stars: null,
   });
 
+  const [errors, setErrors] = useState({});
+
+  // Validate Textfields
+  const validate = () => {
+    let tempErrors = {};
+    tempErrors.name = book.name ? "" : "This field is required.";
+    tempErrors.author = book.author ? "" : "This field is required.";
+    tempErrors.img = book.img ? "" : "This field is required.";
+    tempErrors.genres = book.genres.length ? "" : "This field is required.";
+    setErrors(tempErrors);
+
+    return Object.values(tempErrors).every((x) => x === "");
+  };
+
   // event handling for genres
   const genreChangeHandler = (event) => {
     const { value } = event.target;
@@ -58,21 +72,23 @@ function AddBook() {
   // form submission handler
   function postHandler(e) {
     e.preventDefault();
-    try {
-      post("books", book);
-    } catch (error) {
-      console.error(error);
+    if (validate()) {
+      try {
+        post("books", book);
+      } catch (error) {
+        console.error(error);
+      }
+      // reset
+      setBook({
+        author: "",
+        name: "",
+        genres: [],
+        completed: false,
+        start: null,
+        end: null,
+        stars: null,
+      });
     }
-    // reset
-    setBook({
-      author: "",
-      name: "",
-      genres: [],
-      completed: false,
-      start: null,
-      end: null,
-      stars: null,
-    });
   }
 
   return (
@@ -91,18 +107,24 @@ function AddBook() {
           id="outlined-basic"
           label="Title"
           variant="outlined"
+          error={!!errors.name}
+          helperText={errors.name}
         />
         <TextField
           name="author"
           id="outlined-basic"
           label="Author"
           variant="outlined"
+          error={!!errors.author}
+          helperText={errors.author}
         />
         <TextField
           name="img"
           id="outlined-basic"
           label="Image (url)"
           variant="outlined"
+          error={!!errors.img}
+          helperText={errors.img}
         />
         <Select
           labelId="demo-multiple-name-label"
@@ -110,6 +132,8 @@ function AddBook() {
           multiple
           value={book.genres}
           name="genres"
+          error={!!errors.genres}
+          helperText={errors.genres}
           onChange={genreChangeHandler}
           input={<OutlinedInput label="Genre" />}
         >
