@@ -1,15 +1,8 @@
 // the book details will be called here..
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useAxios from "../services/useAxios";
-import {
-  Box,
-  Typography,
-  Button,
-  CircularProgress,
-  Stack,
-  Chip,
-} from "@mui/material";
+import { Box, Typography, CircularProgress, Stack, Chip } from "@mui/material";
 
 function Book() {
   const { id } = useParams();
