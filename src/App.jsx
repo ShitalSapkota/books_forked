@@ -6,6 +6,7 @@ import Root from "./routes/Root";
 import Books from "./routes/Books";
 import Book from "./routes/Book";
 import AddBook from "./routes/AddBook";
+import useAxios from "./services/useAxios";
 
 const theme = createTheme({
   palette: {
@@ -26,7 +27,7 @@ function App() {
       element: <Root />,
       children: [
         { path: "/", element: <Books /> },
-        { path: "/book", element: <Book /> },
+        { path: "/book/:id", element: <Book /> },
         { path: "/addnew", element: <AddBook /> },
       ],
     },

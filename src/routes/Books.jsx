@@ -14,6 +14,7 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // for Books: to store and fetch data
 function Books() {
@@ -23,6 +24,7 @@ function Books() {
 
   const [searchBook, setSearchBook] = useState(""); // for searching book
   const [filteredBooks, setFilteredBooks] = useState([]); // to filtered books by genres
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (books.length === 0) {
@@ -129,7 +131,12 @@ function Books() {
                     readOnly
                     size="small"
                   />
-                  <Button size="small">Learn More</Button>
+                  <Button
+                    size="small"
+                    onClick={() => navigate(`/book/${book.id}`)}
+                  >
+                    Learn More
+                  </Button>
                 </CardActions>
               </Card>
             ))}
