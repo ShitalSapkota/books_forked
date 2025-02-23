@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+// useAxios is a custom hook for managing api calling data efficiently.
 const useAxios = (baseUrl) => {
   const [data, setData] = useState(null);
   const [alert, setAlert] = useState({ show: false, message: '', type: '' });
@@ -25,6 +26,7 @@ const useAxios = (baseUrl) => {
       setLoading(false);
     }
   };
+  // for api methods; GET, POST, PUT, DELETE
   const get = async (endpoint) => makeRequest('get', endpoint);
   const post = async (endpoint, payload) =>
     makeRequest('post', endpoint, payload);

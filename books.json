@@ -54,7 +54,7 @@
       "start": "2023-06-15",
       "end": "2023-07-10",
       "stars": 5,
-      "img": "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61pX0NiXdvL._AC_.jpg"
+      "img": "https://m.media-amazon.com/images/I/91wKDODkgWL._SL1500_.jpg"
     },
     {
       "author": "David JP Phillips",
@@ -68,6 +68,33 @@
       "stars": "5",
       "id": 5,
       "img": "https://www.davidjpphillips.com/wp-content/uploads/2023/08/highonlife_copy-195x300.jpg"
+    },
+    {
+      "author": "J. K. Rowling",
+      "name": "Harry Potter and the Order of the Phoenix",
+      "genres": [
+        "Fantasy"
+      ],
+      "completed": true,
+      "start": null,
+      "end": null,
+      "stars": "4",
+      "img": "https://books.google.fi/books/content?id=jk87_y-ubE0C&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U3RWLrDg48eDz-AxzjATUMkV1RJUg&w=1280",
+      "id": 6
+    },
+    {
+      "author": "Harper Lee",
+      "name": " To Kill a Mockingbird",
+      "genres": [
+        "Thriller",
+        "Fiction"
+      ],
+      "completed": true,
+      "start": null,
+      "end": null,
+      "stars": "5",
+      "img": "https://books.google.fi/books/publisher/content?id=PGR2AwAAQBAJ&pg=PP1&img=1&zoom=3&hl=en&bul=1&sig=ACfU3U2yOpslGog4pI6u_p_MvRErD_yKCA&w=1280",
+      "id": 7
     }
   ]
 }
